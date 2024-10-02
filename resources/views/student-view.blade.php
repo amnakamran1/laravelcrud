@@ -33,7 +33,7 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Address</th>
-                
+                    <th>image</th>
                     <th>Gender</th>
                     <th>Points</th>
                     <th>Status</th>
@@ -46,6 +46,7 @@
                 <td>{{$student->name}}</td>
                 <td>{{$student->email}}</td>
                 <td>{{$student->address}}</td>
+                <td><img src="images/{{$student->image}}" class="rounded-circle" width="50" height="50"></td>
             
                 <td>
                     @if ($student->gender == 'M')
@@ -64,9 +65,9 @@
             Inactive
             @endif
             </td>
-        <td>    <a href="{{ url('/student/edit/') }}/{{ $student->student_id }}"><button class="btn btn-primary">Edit</button></a></td>
+        <td>    <a href="{{ url('edit/') }}/{{ $student->student_id }}"><button class="btn btn-primary">Edit</button></a></td>
             <td>
-                        <a href="{{ url('/student/delete/') }}/{{ $student->student_id }}">
+                        <a href="{{ url('delete/') }}/{{ $student->student_id }}">
                             <button class="btn btn-danger">Delete</button>
                         </a>
                     </td>

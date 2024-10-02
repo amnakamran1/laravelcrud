@@ -15,12 +15,32 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('welcome');
 });
-Route::get('/index',[UserController::class, 'index']);
+
 Route::post('/index',[UserController::class, 'store']);
 // Route::get('student-view/create/',[UserController::class, 'create'])->name('student-view.create');
-Route::get('/student-view',[UserController::class, 'view']);
-Route::get('student/delete/{id}',[UserController::class, 'delete']);
-Route::get('student/edit/{id}',[UserController::class, 'edit']);
-Route::put('student/update/{id}',[UserController::class, 'update']);
+
+Route::get('delete/{id}',[UserController::class, 'delete']);
+Route::get('edit/{id}',[UserController::class, 'edit']);
+Route::put('update/{id}',[UserController::class, 'update']);
+Route::get('/login', function () {
+    session()->put('user_id',1);
+    return redirect('/');
+    
+    
+ });
+ Route::get('/logout', function () {
+    session()->forget('user_id');
+    return redirect('/');
+ });
+ 
+ 
+ Route::get('/no-access', function () {
+     echo 'You are not allowed to access this page';
+     die;
+    });
+    Route::middleware(['check'])->group(function(){
+        Route::get('/index',[UserController::class, 'index']);
+        Route::get('/student-view',[UserController::class, 'view']);
+    });

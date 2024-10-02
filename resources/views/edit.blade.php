@@ -16,21 +16,27 @@
 <body>
     <div class="container my-5 text-center">
         <h1 class="text-primary">Student Edit Form</h1>
-        <form class="my-5" action="{{url('/student/update/' .$student->student_id)}}" method="post">
+        <form class="my-5" action="{{url('update/' .$student->student_id)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
+        @if (session ('status'))
+                <div class="alert alert-success">{{session ('status')}}</div>
+                @endif
             <div class="row">
                 <div class="col-lg-6 my-3">
                     <input type="text" name="name" value="{{$student->name}}" class="form-control" placeholder="Full Name"  requirede>
                 </div>
                 <div class="col-lg-6 my-3">
-                    <input type="email" name="email" value="{{$student->email}}"class="form-control" placeholder="Email"  required>
+                    <input type="email" name="email" value="{{$student->email}}"class="form-control" placeholder="Email"  >
                 </div>
                 <div class="col-lg-6 my-3">
-                    <input type="text" name="address"value="{{$student->address}}" class="form-control" placeholder="Address"  required>
+                    <input type="text" name="address"value="{{$student->address}}" class="form-control" placeholder="Address"  >
                 </div>
                 <div class="col-lg-6 my-3">
-                    <input type="text" name="city" value="{{$student->city}}" class="form-control" placeholder="City"  required>
+                    <input type="text" name="city" value="{{$student->city}}" class="form-control" placeholder="City"  >
+                </div>
+                <div class="col-lg-6 my-3">
+                    <input type="file" name="image" value="images/{{$student->image}}" class="form-control" placeholder="City"  >
                 </div>
                 <!--  <div class="col-lg-6 my-3">
                     <input type="date" name="date_of_birth" class="form-control" placeholder="Date Of Birth">

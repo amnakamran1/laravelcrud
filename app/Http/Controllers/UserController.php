@@ -14,15 +14,18 @@ class UserController extends Controller
 
 
     public function store(Request $request)
-    {
-        //echo "<pre>";
-//print_r($request->all());
-
+{
+    
+        
+$imageName=time().' .'.$request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
         $student = new Student;
         $student->name = $request['name'];
         $student->email = $request['email'];
         $student->address = $request['address'];
         $student->city = $request['city'];
+        $student->image = $imageName;
+
        // $customer->date_of_birth = ['date_of_birth']; // Change date format
         $student->gender = $request['gender'];
         $student->password = md5($request['password']);
@@ -30,7 +33,7 @@ class UserController extends Controller
         $student->status = $request['status'];
         $student->save();
 
-        return redirect('student-view');
+        return redirect('student-view')->with('status', 'Data saved successfully!');;
     }
     public function view()  {
         $students = Student::all();
@@ -77,4 +80,5 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Student not found.');
         }
     }
+    
     }

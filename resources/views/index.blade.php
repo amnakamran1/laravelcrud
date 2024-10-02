@@ -16,7 +16,7 @@
 <body>
     <div class="container my-5 text-center">
         <h1 class="text-primary">Student Registration</h1>
-        <form class="my-5" action="{{ url('/') }}/index" method="post">
+        <form class="my-5" action="{{ url('/') }}/index" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-lg-6 my-3">
@@ -30,6 +30,9 @@
                 </div>
                 <div class="col-lg-6 my-3">
                     <input type="text" name="city" class="form-control" placeholder="City"  required>
+                </div>
+                <div class="col-lg-6 my-3">
+                    <input type="file" name="image" class="form-control" placeholder="image"  required>
                 </div>
                 <!--  <div class="col-lg-6 my-3">
                     <input type="date" name="date_of_birth" class="form-control" placeholder="Date Of Birth">
